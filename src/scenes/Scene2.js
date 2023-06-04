@@ -4,11 +4,16 @@ class Scene2 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('dragme', 'assets/dragme.png');
-        this.load.image('redX', 'assets/redX.png');
+        this.load.path = './assets/';
+        this.load.image('dragme', 'dragme.png');
+        this.load.image('redX', 'redX.png');
+        this.load.image('background', 'Background.png');
+        this.load.image('idle', 'idle.png');
+        this.load.atlas('manAtlas', 'walk.png', 'walk.json');
     }
 
     create() {
+        this.add.tileSprite(0, 0, 768, 768, 'background').setOrigin(0, 0);
         let redX = this.add.sprite(10, 10, 'redX');
         let dragme = this.add.sprite(50, 50, 'dragme');
         dragme.setInteractive({ draggable: true });
@@ -20,10 +25,30 @@ class Scene2 extends Phaser.Scene {
                 console.log("overlaps with snap");
             }
         }, this)
+
+        this.man = this.physics.add.sprite(game.config.width/2, game.config.height/2, 'manAtlas', 'Walk1');
+        this.man.setScale(3);
+
+        this.anims.create({
+            key: 'Walk',
+            frames: this.anims.generateFrameNames('manAtlas', {
+                prefix: 'Walk',
+                start: 1,
+                end: 4,
+            }),
+            defaultTextureKey: 'manAtlas',
+            frameRate: 7,
+            repeat: -1
+        });
+
+        this.man.setInteractive({ draggable: true });
+        this.man.on('drag', function (pointer, dragX, dragY) {
+            this.man.setPosition(dragX, dragY);
+        }, this)
     }
 
     update() {
-
+        this.man.anims.play('Walk', true);
     }
 
     snapIfOverlap(toDrag) {

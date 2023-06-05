@@ -13,6 +13,7 @@ class Scene2 extends Phaser.Scene {
     }
 
     create() {
+        this.chasers = [];
         this.add.tileSprite(0, 0, 768, 768, 'background').setOrigin(0, 0);
         let redX = this.add.sprite(10, 10, 'redX');
         let dragme = this.add.sprite(50, 50, 'dragme');
@@ -28,9 +29,6 @@ class Scene2 extends Phaser.Scene {
 
         this.ground = this.physics.add.sprite(game.config.width/2, game.config.height, 'ground').setImmovable(true);
 
-        this.man = this.physics.add.sprite(game.config.width/2, game.config.height/2, 'manAtlas', 'Walk1').setScale(3).setGravityY(200);
-        this.physics.add.collider(this.man, this.ground);
-
 
         this.anims.create({
             key: 'Walk',
@@ -43,15 +41,30 @@ class Scene2 extends Phaser.Scene {
             frameRate: 7,
             repeat: -1
         });
-
-        this.man.setInteractive({ draggable: true });
-        this.man.on('drag', function (pointer, dragX, dragY) {
-            this.man.setPosition(dragX, dragY);
-        }, this)
     }
 
     update() {
-        this.man.anims.play('Walk', true);
+        //Spawn chasers until there are 5
+        if (this.chasers.length < 5) {
+            this.spawnChaser();
+        }
+
+        this.chasers.forEach(chaser => {
+            chaser.anims.play('Walk', true);
+            chaser.update();
+        });
+
+    }
+
+    spawnChaser() {
+        //spawn a chaser at a random location
+        let chaser = new s2Chaser(this, Phaser.Math.Between(0, game.config.width), Phaser.Math.Between(0, game.config.height), 'idle', 0);
+    
+        this.physics.add.collider(chaser, this.ground);
+        chaser.on('drag', function (pointer, dragX, dragY) {
+            chaser.setPosition(dragX, dragY);
+        }, this)
+        this.chasers.push(chaser);
     }
 
     snapIfOverlap(toDrag) {

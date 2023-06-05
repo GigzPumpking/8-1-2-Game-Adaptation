@@ -1,4 +1,4 @@
-class s2Chaser extends Phaser.Physics.Arcade.Sprite {
+class s2Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 
@@ -12,18 +12,9 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
             .setInteractive({ draggable: true })
             .setCollideWorldBounds(true);
 
-        this.moveSpeed = 20;
-
-    }
-
-    move() {
-        //Automatically moves in facing direction
-        let angle = this.body.rotation;
-        this.forceX = Math.cos(angle) * this.moveSpeed;
-        this.body.setVelocityX(this.forceX);
     }
 
     update() {
-        this.move();
+
     }
 }

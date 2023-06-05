@@ -26,8 +26,11 @@ class Scene2 extends Phaser.Scene {
             }
         }, this)
 
-        this.man = this.physics.add.sprite(game.config.width/2, game.config.height/2, 'manAtlas', 'Walk1');
-        this.man.setScale(3);
+        this.ground = this.physics.add.sprite(game.config.width/2, game.config.height, 'ground').setImmovable(true);
+
+        this.man = this.physics.add.sprite(game.config.width/2, game.config.height/2, 'manAtlas', 'Walk1').setScale(3).setGravityY(200);
+        this.physics.add.collider(this.man, this.ground);
+
 
         this.anims.create({
             key: 'Walk',

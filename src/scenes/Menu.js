@@ -4,7 +4,8 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.path = './assets/';
+        this.load.image('ground', 'ground.png');
     }
     create() {
         let menuConfig = {

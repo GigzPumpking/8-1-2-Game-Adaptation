@@ -8,6 +8,7 @@ class Menu extends Phaser.Scene {
         this.load.image('ground', 'ground.png');
     }
     create() {
+        currScene = 'menuScene';
         let menuConfig = {
             fontFamily: 'Georgia',
             fontSize: '75px',

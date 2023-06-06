@@ -8,7 +8,7 @@ class Scene3 extends Phaser.Scene {
     }
 
     create() {
-
+        currScene = 'playScene3';
     }
 
     update() {

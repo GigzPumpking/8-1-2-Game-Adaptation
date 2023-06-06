@@ -8,12 +8,76 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
 
         this
             .setScale(3)
-            .setGravityY(200)
+            .setGravityY(300)
             .setInteractive({ draggable: true })
             .setCollideWorldBounds(true);
 
         this.moveSpeed = 20;
 
+        this.popUpConfig = {
+            fontFamily: 'Courier',
+            fontSize: '16px',
+            color: '#000',
+            align: 'center'
+        }
+
+        //random timer for chaser to say something
+        this.randomTimer = Math.floor(Math.random() * 300) + 200;
+
+        this.numChasers = 0;
+    }
+
+    randomizedPhrase() {
+        //Phrases is a list of phrases that the chaser can say, and the chaser will randomly choose one to say
+
+        let phrases = ["Come back, Guido!", "About the script for Claudia...", "Please consider my idea!", "How was my screen test?", "What role do I play?", "I have three questions.", "Does Claudia have a script?", "Do you have a script?", "You're going to lose her.", "Signora Carla called.", "I would like to introduce you...", "Are your ideas any clearer?", "What are your love stories?"];
+        let randomIndex = Math.floor(Math.random() * phrases.length);
+        return phrases[randomIndex];
+    }
+
+    randomizedIntro() {
+        //Phrases is a list of intro phrases that the chaser can say, and the chaser will randomly choose one to say
+
+        let phrases = ["Guido.", "Director!", "Dottore!", "Guido, darling!", "Guido, dear!", "Excuse me...", "Excuse me, director?", "Buon Giorno.", "Buon Giorno!"];
+        let randomIndex = Math.floor(Math.random() * phrases.length);
+        return phrases[randomIndex];
+    }
+
+    talk() {
+        let IntroText = this.scene.add.text(this.x + this.width*this.scale - 5, this.y - this.height*this.scale + 30, this.randomizedIntro(), this.popUpConfig).setOrigin(0, 0.5).setDepth(3);
+        //randomize text size
+        IntroText.setFontSize(Math.floor(Math.random() * 16) + 8);
+        
+        this.scene.tweens.add({
+            targets: IntroText,
+            alpha: 0,
+            duration: 2000,
+            ease: 'Linear',
+            repeat: 0,
+            yoyo: false,
+            onComplete: () => {
+                IntroText.destroy();
+                this.talk2();
+            }
+        });
+    }
+
+    talk2() {
+        let Text = this.scene.add.text(this.x + this.width*this.scale - 10, this.y - this.height*this.scale + 30, this.randomizedPhrase(), this.popUpConfig).setOrigin(0, 0.5).setDepth(3);
+        //randomize text size
+        Text.setFontSize(Math.floor(Math.random() * 16) + 8);
+        Text.fontSize *= (1 - this.numChasers/50);
+        this.scene.tweens.add({
+            targets: Text,
+            alpha: 0,
+            duration: 2000,
+            ease: 'Linear',
+            repeat: 0,
+            yoyo: false,
+            onComplete: () => {
+                Text.destroy();
+            }
+        });
     }
 
     move() {
@@ -23,7 +87,19 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
         this.body.setVelocityX(this.forceX);
     }
 
+    incrementChasers(num) {
+        this.numChasers = num;
+    }
+
     update() {
-        this.move();
+        if (this.y > game.config.height - this.height*3) this.move();
+        else this.body.setVelocityX(0);
+
+        console.log(this.randomTimer);
+
+        if (this.randomTimer < 0) {
+            this.talk();
+            this.randomTimer = Math.floor(Math.random() * 300) + 500;
+        } else this.randomTimer -= 1;
     }
 }

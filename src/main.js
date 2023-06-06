@@ -15,12 +15,15 @@ let config = {
             }
         }
     },
-    scene: [ Menu, Scene1, Scene2, Scene3, GameOver ]
+    scene: [ Menu, Scene1, Scene2, Scene3, GameOver, Pause ]
 }
 
 let game = new Phaser.Game(config);
 
 // set UI
+
+let centerX = game.config.width/2;
+let centerY = game.config.height/2;
 
 let borderUISize = game.config.height / 35;
 let borderPadding = borderUISize / 10;
@@ -29,4 +32,6 @@ let PlayButton, Ready;
 
 let fallSpeed = 3;
 
-let keyR, keyLEFT
+let keyP;
+
+let currScene;

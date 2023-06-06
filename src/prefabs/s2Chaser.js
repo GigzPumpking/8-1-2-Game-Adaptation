@@ -95,7 +95,7 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
         if (this.y > game.config.height - this.height*3) this.move();
         else this.body.setVelocityX(0);
 
-        console.log(this.randomTimer);
+        //console.log(this.randomTimer);
 
         if (this.randomTimer < 0) {
             this.talk();

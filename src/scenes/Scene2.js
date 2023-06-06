@@ -7,29 +7,36 @@ class Scene2 extends Phaser.Scene {
         this.load.path = './assets/';
         this.load.image('background', 'Background.png');
         this.load.image('idle', 'idle.png');
-        this.load.atlas('manAtlas', 'walk.png', 'walk.json');
+        this.load.atlas('walkingManAtlas', 'walkingMan.png', 'walkingMan.json');
+        this.load.image('closeBG','close_bg_scene2.png');
+        this.load.image('farBG','far_bg_scene2.png');
     }
 
     create() {
+        this.farBG = this.add.tileSprite(750, 300, 1500, 600, 'farBG');
+        this.closeBG = this.add.tileSprite(750, 300, 1500, 600, 'closeBG');
+
         currScene = 'playScene2';
         keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         this.chasers = [];
         this.chaserSpawnTimer = 0;
         this.chaserSpawnRate = 500;
 
-        this.add.tileSprite(0, 0, 768, 768, 'background').setOrigin(0, 0);
+        //this.add.tileSprite(0, 0, 768, 768, 'background').setOrigin(0, 0);
 
-        this.ground = this.physics.add.sprite(game.config.width/2, game.config.height, 'ground').setImmovable(true);
+        this.groundOffset = 110;
 
-        this.player = new s2Player(this, game.config.width - 50, game.config.height - 50, 'idle', 0).setImmovable(true);
+        this.ground = this.physics.add.sprite(game.config.width/2, game.config.height - this.groundOffset, 'ground').setImmovable(true);
+
+        this.player = new s2Player(this, game.config.width - 50, game.config.height - 50 - this.groundOffset, 'idle', 0).setImmovable(true);
         this.player.anims.create({
             key: 'PlayerWalk',
-            frames: this.anims.generateFrameNames('manAtlas', {
-                prefix: 'Walk',
+            frames: this.anims.generateFrameNames('walkingManAtlas', {
+                prefix: 'walkingMan',
                 start: 1,
-                end: 4,
+                end: 8,
             }),
-            defaultTextureKey: 'manAtlas',
+            defaultTextureKey: 'walkingManAtlas',
             frameRate: 7,
             repeat: -1
         });
@@ -37,18 +44,20 @@ class Scene2 extends Phaser.Scene {
 
         this.anims.create({
             key: 'Walk',
-            frames: this.anims.generateFrameNames('manAtlas', {
-                prefix: 'Walk',
+            frames: this.anims.generateFrameNames('walkingManAtlas', {
+                prefix: 'walkingMan',
                 start: 1,
-                end: 4,
+                end: 8,
             }),
-            defaultTextureKey: 'manAtlas',
+            defaultTextureKey: 'walkingManAtlas',
             frameRate: 7,
             repeat: -1
         });
     }
 
     update() {
+        this.closeBG.tilePositionX += (5);
+        this.farBG.tilePositionX += (5);
         //When P is pressed, pause the game
         if (Phaser.Input.Keyboard.JustDown(keyP)) this.scene.pause().launch('pauseScene');
         //Spawn chasers until there are 5
@@ -73,7 +82,7 @@ class Scene2 extends Phaser.Scene {
 
     spawnChaser() {
         //spawn a chaser at a random location
-        let chaser = new s2Chaser(this, -50, game.config.height, 'idle', 0);
+        let chaser = new s2Chaser(this, -50, game.config.height - this.groundOffset, 'idle', 0);
         //set chaser speed to random value between 10 and 50
         chaser.moveSpeed = Math.floor(Math.random() * 40) + 10;
     
@@ -104,7 +113,6 @@ class Scene2 extends Phaser.Scene {
                 toDrag.setPosition(zoneCoords[i][0], zoneCoords[i][1]);
                 return true;
             }
-            
         }
         return false;
     }*/

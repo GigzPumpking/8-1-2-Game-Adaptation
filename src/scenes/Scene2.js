@@ -26,9 +26,9 @@ class Scene2 extends Phaser.Scene {
 
         this.groundOffset = 110;
 
-        this.ground = this.physics.add.sprite(game.config.width/2, game.config.height - this.groundOffset, 'ground').setImmovable(true);
+        this.ground = this.physics.add.sprite(game.config.width/2, game.config.height + this.groundOffset, 'ground').setImmovable(true).setScale(1.5);
 
-        this.player = new s2Player(this, game.config.width - 50, game.config.height - 50 - this.groundOffset, 'idle', 0).setImmovable(true);
+        this.player = new s2Player(this, game.config.width - 50, game.config.height - 50 + this.groundOffset, 'idle', 0).setImmovable(true);
         this.player.anims.create({
             key: 'PlayerWalk',
             frames: this.anims.generateFrameNames('walkingManAtlas', {
@@ -82,7 +82,7 @@ class Scene2 extends Phaser.Scene {
 
     spawnChaser() {
         //spawn a chaser at a random location
-        let chaser = new s2Chaser(this, -50, game.config.height - this.groundOffset, 'idle', 0);
+        let chaser = new s2Chaser(this, -50, game.config.height + this.groundOffset, 'idle', 0);
         //set chaser speed to random value between 10 and 50
         chaser.moveSpeed = Math.floor(Math.random() * 40) + 10;
     

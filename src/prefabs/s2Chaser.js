@@ -44,7 +44,7 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
     }
 
     talk() {
-        let IntroText = this.scene.add.text(this.x + this.width*this.scale - 5, this.y - this.height*this.scale + 30, this.randomizedIntro(), this.popUpConfig).setOrigin(0, 0.5).setDepth(3);
+        let IntroText = this.scene.add.text(this.x + this.width*this.scale - 5, this.y - this.height*this.scale + 50, this.randomizedIntro(), this.popUpConfig).setOrigin(0, 0.5).setDepth(3);
         //randomize text size
         IntroText.setFontSize(Math.floor(Math.random() * 16) + 8);
         
@@ -63,7 +63,7 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
     }
 
     talk2() {
-        let Text = this.scene.add.text(this.x + this.width*this.scale - 10, this.y - this.height*this.scale + 30, this.randomizedPhrase(), this.popUpConfig).setOrigin(0, 0.5).setDepth(3);
+        let Text = this.scene.add.text(this.x + this.width*this.scale - 10, this.y - this.height*this.scale + 50, this.randomizedPhrase(), this.popUpConfig).setOrigin(0, 0.5).setDepth(3);
         //randomize text size
         Text.setFontSize(Math.floor(Math.random() * 16) + 8);
         Text.fontSize *= (1 - this.numChasers/50);

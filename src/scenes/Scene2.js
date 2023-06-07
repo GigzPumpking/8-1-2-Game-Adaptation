@@ -70,11 +70,13 @@ class Scene2 extends Phaser.Scene {
 
         this.chasers.forEach(chaser => {
             chaser.update();
-            //if chaser collides with player, end game
             chaser.incrementChasers(this.chasers.length);
-            if (this.physics.collide(chaser, this.player)) {
+            // if chaser is touching player, end game
+
+            if (chaser.x >= this.player.x - this.player.width*this.player.scale + 30 && chaser.y >= this.player.y - this.player.height*this.player.scale - 20) {
                 this.scene.start('gameOverScene');
             }
+
         });
     }
 
@@ -83,8 +85,11 @@ class Scene2 extends Phaser.Scene {
         let chaser = new s2Chaser(this, -50, game.config.height + this.groundOffset, 'idle', 0);
         //set chaser speed to random value between 10 and 50
         chaser.moveSpeed = Math.floor(Math.random() * 40) + 10;
+
+        //randomize Chaser scale 
+        chaser.scale = Math.random() * 0.5 + 2.7;
+        console.log(chaser.scale);
         
-        this.physics.add.collider(chaser, this.player);
         chaser.on('drag', function (pointer, dragX, dragY) {
             chaser.setPosition(dragX, dragY);
         }, this)
@@ -93,6 +98,14 @@ class Scene2 extends Phaser.Scene {
         chaser.anims.frameRate = chaser.moveSpeed/3;
 
         this.chasers.push(chaser);
+
+        /*// Add a collider between each chaser
+
+        this.chasers.forEach(chaser => {
+            for (let i = 0; i < this.chasers.length; i++) {
+                this.physics.add.collider(chaser, this.chasers[i]);
+            }
+        });*/
     }
 
     // Unused Function

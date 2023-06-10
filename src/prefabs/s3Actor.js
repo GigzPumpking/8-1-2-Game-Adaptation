@@ -1,4 +1,5 @@
 class s3Actor extends Phaser.Physics.Arcade.Sprite {
+    //static actors in scene 3 that are dragged into position
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 

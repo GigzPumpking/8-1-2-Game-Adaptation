@@ -1,4 +1,5 @@
 class s1Player extends Phaser.Physics.Arcade.Sprite {
+    //player character in scene 1
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 
@@ -14,6 +15,7 @@ class s1Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
+        //basic movement and anim triggers
         if (this.scene.keys["A"].isDown) {
             this.setVelocityX(-160);
             this.flipX = true;
@@ -26,11 +28,14 @@ class s1Player extends Phaser.Physics.Arcade.Sprite {
             if (this.anims.isPlaying) {
                 this.anims.play('PlayerWalk');
             }
+
+        //stop if no input
         } else {
             this.setVelocityX(0);
             this.anims.stop();
         }
 
+        //jump
         if (this.scene.keys["W"].isDown && this.body.touching.down)
         {
             this.setVelocityY(-330);

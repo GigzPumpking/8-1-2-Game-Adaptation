@@ -30,14 +30,6 @@ class Scene2 extends Phaser.Scene {
         this.voice7 = this.sound.add('voice7', { mute: false, volume: 0.205, rate: 1});
         this.voices = [this.voice1, this.voice2, this.voice3, this.voice4, this.voice5, this.voice6, this.voice7];
 
-        this.playerWalkSFX = this.sound.add('footsteps', { 
-            mute: false,
-            volume: 0.205,
-            rate: 2.3,
-            loop: true 
-        });
-        this.playerWalkSFX.play();
-
         this.farBG = this.add.tileSprite(750, 300, 1500, 600, 'farBG');
         this.closeBG = this.add.tileSprite(750, 300, 1500, 600, 'closeBG');
 
@@ -104,7 +96,10 @@ class Scene2 extends Phaser.Scene {
 
         });
 
-        this.time.delayedCall(50000, () => {
+        this.time.delayedCall(10000, () => {
+            this.chasers.forEach(chaser => {
+                chaser.playerWalkSFX.stop();
+            });
             this.scene.start('playScene3');
         });
     }

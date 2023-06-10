@@ -13,7 +13,7 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
             .setCollideWorldBounds(true);
 
         this.moveSpeed = 20;
-        this.playerWalkSFX = scene.sound.add('footsteps', { 
+        this.playerWalkSFX = this.scene.sound.add('footsteps', { 
             mute: false,
             volume: 0.205,
             rate: 2.3,

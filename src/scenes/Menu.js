@@ -42,7 +42,7 @@ class Menu extends Phaser.Scene {
     }
     update() {
         if (Ready == true) {
-            this.scene.start('playScene2');
+            this.scene.start('playScene1');
         }
       }
 }

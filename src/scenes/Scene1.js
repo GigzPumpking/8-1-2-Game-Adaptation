@@ -48,6 +48,7 @@ class Scene1 extends Phaser.Scene {
             repeat: -1
         });
 
+        //collidables, including cars, the ground and eventually other obstacles
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(400, 600, 'ground');
         this.platforms.create(400, 575, 'car').setScale(2).refreshBody();

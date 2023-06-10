@@ -84,6 +84,7 @@ class Scene2 extends Phaser.Scene {
     }
 
     update() {
+        //scroll background, parallax effect
         this.closeBG.tilePositionX += (2);
         this.farBG.tilePositionX += (1.8);
 
@@ -91,6 +92,7 @@ class Scene2 extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyP)) this.scene.pause().launch('pauseScene');
         //Spawn chasers until there are 5
 
+        //periodically spawn chasers while there are less than 10
         if (this.chasers.length < 10) {
             if (this.chaserSpawnTimer < 0) {
                 this.spawnChaser();
@@ -99,6 +101,7 @@ class Scene2 extends Phaser.Scene {
             else this.chaserSpawnTimer--;
         }
 
+        //collision checks for chasers
         this.chasers.forEach(chaser => {
             chaser.update();
             chaser.incrementChasers(this.chasers.length);
@@ -110,6 +113,7 @@ class Scene2 extends Phaser.Scene {
 
         });
 
+        //eventually the player escapes to scene 3!
         this.time.delayedCall(50000, () => {
             this.scene.start('playScene3');
         });
@@ -142,24 +146,5 @@ class Scene2 extends Phaser.Scene {
             }
         });*/
     }
-
-    // Unused Function
-
-    /*snapIfOverlap(toDrag) {
-        //check if the given coords overlap with a snappable zone, then snap if that's the case
-        let zoneCoords = [[10, 10, 10, 10]];
-        //zone coords for all snappable zones, in the format: x, y, width / 2, height / 2
-        let margin = 10;
-        //margin of error for snap
-        for (let i = 0; i < zoneCoords.length; i++) {
-            if (toDrag.x > zoneCoords[i][0] - zoneCoords[i][2] - margin && toDrag.x < zoneCoords[i][0] + zoneCoords[i][2] + margin
-                && toDrag.y < zoneCoords[i][2] + zoneCoords[i][3] + margin && toDrag.y > zoneCoords[i][2] - zoneCoords[i][3] - margin) {
-                //within the bounds of snappable zone, should snap
-                toDrag.setPosition(zoneCoords[i][0], zoneCoords[i][1]);
-                return true;
-            }
-        }
-        return false;
-    }*/
 
 }

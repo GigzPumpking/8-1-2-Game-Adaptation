@@ -64,6 +64,7 @@ class Scene3 extends Phaser.Scene {
     }
 
     spawnActor() {
+        //spawn actor randomly in scene
         let actor = new s3Actor(this, Math.floor(Math.random() * 500), 450, 'walkingManIdle', 0);
         actor.on('drag', function (pointer, dragX, dragY) {
             actor.setPosition(dragX, dragY);

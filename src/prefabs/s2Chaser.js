@@ -1,4 +1,5 @@
 class s2Chaser extends Phaser.Physics.Arcade.Sprite {
+    //enemies that chase the player in scene 2
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
 

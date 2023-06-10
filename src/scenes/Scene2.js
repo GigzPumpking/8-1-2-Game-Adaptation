@@ -103,6 +103,10 @@ class Scene2 extends Phaser.Scene {
             }
 
         });
+
+        this.time.delayedCall(50000, () => {
+            this.scene.start('playScene3');
+        });
     }
 
     spawnChaser() {

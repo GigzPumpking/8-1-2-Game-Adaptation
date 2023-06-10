@@ -41,13 +41,12 @@ class Scene1 extends Phaser.Scene {
         this.platforms.create(400, 575, 'car').setScale(2).refreshBody();
 
         this.physics.add.collider(this.player, this.platforms);
-
-        if(this.player.x > 500) {
-            this.scene.start('playScene2');
-        }
     }
 
     update() {
         this.player.update();
+        if (this.player.x > 500) {
+            this.scene.start('playScene2');
+        }
     }
 }

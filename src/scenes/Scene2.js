@@ -18,6 +18,7 @@ class Scene2 extends Phaser.Scene {
         this.load.audio('voice5', 'dillonbecker/scene2/voice5.wav');
         this.load.audio('voice6', 'dillonbecker/scene2/voice6.wav');
         this.load.audio('voice7', 'dillonbecker/scene2/voice7.wav');
+        this.load.image("dragaway", "dragaway.png");
     }
 
     create() {
@@ -40,6 +41,9 @@ class Scene2 extends Phaser.Scene {
 
         this.farBG = this.add.tileSprite(750, 300, 1500, 600, 'farBG');
         this.closeBG = this.add.tileSprite(750, 300, 1500, 600, 'closeBG');
+
+        this.dragaway = this.add.image(300, 300, 'dragaway').setScale(2);
+        this.dragaway.depth = 1;
 
         currScene = 'playScene2';
         keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
@@ -76,11 +80,13 @@ class Scene2 extends Phaser.Scene {
             frameRate: 7,
             repeat: -1
         });
+
     }
 
     update() {
-        this.closeBG.tilePositionX += (5);
-        this.farBG.tilePositionX += (5);
+        this.closeBG.tilePositionX += (2);
+        this.farBG.tilePositionX += (1.8);
+
         //When P is pressed, pause the game
         if (Phaser.Input.Keyboard.JustDown(keyP)) this.scene.pause().launch('pauseScene');
         //Spawn chasers until there are 5

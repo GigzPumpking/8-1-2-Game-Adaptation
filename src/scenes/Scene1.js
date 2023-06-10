@@ -10,6 +10,8 @@ class Scene1 extends Phaser.Scene {
         this.load.image('walkingManIdle','walkingManIdle.png');
         this.load.image('ground','ground.png');
         this.load.image('car','car.png');
+        this.load.image('walkright', 'walkright.png');
+        this.load.audio('wind', 'kronbits/scene1/Retro Cinematic Wind 02.wav')
     }
 
     create() {
@@ -21,7 +23,17 @@ class Scene1 extends Phaser.Scene {
             rate: 2.3,
         });
 
+        this.windSFX = this.sound.add('wind', { 
+            mute: false,
+            volume: 0.205,
+            rate: 1,
+            loop: true 
+        });
+        //this.windSFX.play();
+
         this.keys = this.input.keyboard.addKeys("W,A,S,D");
+
+        this.moveright = this.add.image(300, 300, 'walkright').setScale(2);
 
         this.player = new s1Player(this, 200, 200, 'walkingManIdle', 0);
         this.player.anims.create({

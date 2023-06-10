@@ -55,7 +55,7 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
         //play talking sound effect
         let randomVoiceIndex = Math.floor(Math.random() * this.scene.voices.length);
         this.scene.voices[randomVoiceIndex].play();
-
+        
         //randomize text size
         IntroText.setFontSize(Math.floor(Math.random() * 16) + 8);
         
@@ -78,7 +78,6 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
         //play talking sound effect
         let randomVoiceIndex = Math.floor(Math.random() * this.scene.voices.length);
         this.scene.voices[randomVoiceIndex].play();
-        
         //randomize text size
         Text.setFontSize(Math.floor(Math.random() * 16) + 8);
         Text.fontSize *= (1 - this.numChasers/50);

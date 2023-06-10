@@ -10,9 +10,34 @@ class Scene2 extends Phaser.Scene {
         this.load.atlas('walkingManAtlas', 'walkingMan.png', 'walkingMan.json');
         this.load.image('closeBG','close_bg_scene2.png');
         this.load.image('farBG','far_bg_scene2.png');
+        this.load.audio('footsteps', 'kronbits/scene2/Retro FootStep Mud 01.wav');
+        this.load.audio('voice1', 'dillonbecker/scene2/voice1.wav');
+        this.load.audio('voice2', 'dillonbecker/scene2/voice2.wav');
+        this.load.audio('voice3', 'dillonbecker/scene2/voice3.wav');
+        this.load.audio('voice4', 'dillonbecker/scene2/voice4.wav');
+        this.load.audio('voice5', 'dillonbecker/scene2/voice5.wav');
+        this.load.audio('voice6', 'dillonbecker/scene2/voice6.wav');
+        this.load.audio('voice7', 'dillonbecker/scene2/voice7.wav');
     }
 
     create() {
+        this.voice1 = this.sound.add('voice1', { mute: false, volume: 0.205, rate: 1});
+        this.voice2 = this.sound.add('voice2', { mute: false, volume: 0.205, rate: 1});
+        this.voice3 = this.sound.add('voice3', { mute: false, volume: 0.205, rate: 1});
+        this.voice4 = this.sound.add('voice4', { mute: false, volume: 0.205, rate: 1});
+        this.voice5 = this.sound.add('voice5', { mute: false, volume: 0.205, rate: 1});
+        this.voice6 = this.sound.add('voice6', { mute: false, volume: 0.205, rate: 1});
+        this.voice7 = this.sound.add('voice7', { mute: false, volume: 0.205, rate: 1});
+        this.voices = [this.voice1, this.voice2, this.voice3, this.voice4, this.voice5, this.voice6, this.voice7];
+
+        this.playerWalkSFX = this.sound.add('footsteps', { 
+            mute: false,
+            volume: 0.205,
+            rate: 2.3,
+            loop: true 
+        });
+        this.playerWalkSFX.play();
+
         this.farBG = this.add.tileSprite(750, 300, 1500, 600, 'farBG');
         this.closeBG = this.add.tileSprite(750, 300, 1500, 600, 'closeBG');
 

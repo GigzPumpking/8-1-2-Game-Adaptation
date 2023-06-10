@@ -22,6 +22,9 @@ class Scene2 extends Phaser.Scene {
     }
 
     create() {
+        this.initialTime = 50;
+        this.timeLeft = this.add.text(0, 0, 'Timer: ' + this.initialTime, clockConfig).setDepth(3);
+        
         this.voice1 = this.sound.add('voice1', { mute: false, volume: 0.205, rate: 1});
         this.voice2 = this.sound.add('voice2', { mute: false, volume: 0.205, rate: 1});
         this.voice3 = this.sound.add('voice3', { mute: false, volume: 0.205, rate: 1});
@@ -73,9 +76,19 @@ class Scene2 extends Phaser.Scene {
             repeat: -1
         });
 
+        //eventually the player escapes to scene 3!
+        this.time.delayedCall((this.initialTime*1000), () => {
+            this.chasers.forEach(chaser => {
+                chaser.playerWalkSFX.stop();
+            });
+            this.scene.start('playScene3');
+        });
+
+        this.time.addEvent({ delay: 1000, callback: this.timeDecrease, callbackScope: this, loop: true });
     }
 
     update() {
+        
         //scroll background, parallax effect
         this.closeBG.tilePositionX += (2);
         this.farBG.tilePositionX += (1.8);
@@ -104,14 +117,11 @@ class Scene2 extends Phaser.Scene {
             }
 
         });
+    }
 
-        //eventually the player escapes to scene 3!
-        this.time.delayedCall(50000, () => {
-            this.chasers.forEach(chaser => {
-                chaser.playerWalkSFX.stop();
-            });
-            this.scene.start('playScene3');
-        });
+    timeDecrease() {
+        this.initialTime -= 1;
+        this.timeLeft.setText('Timer: ' + this.initialTime);
     }
 
     spawnChaser() {

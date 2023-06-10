@@ -46,3 +46,18 @@ let fallSpeed = 3;
 let keyP;
 
 let currScene;
+
+let clockConfig = {
+    fontFamily: 'Courier',
+    fontSize: '28px',
+    backgroundColor: '#000000',
+    color: '#FFFFFF',
+    align: 'right',
+    padding: {
+        top: 5,
+        bottom: 5,
+        right: 5,
+        left: 5
+    },
+    fixedWidth: 170
+}

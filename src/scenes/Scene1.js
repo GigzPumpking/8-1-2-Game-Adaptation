@@ -69,6 +69,12 @@ class Scene1 extends Phaser.Scene {
         
 
         this.physics.add.collider(this.player, this.platforms);
+
+        this.add.text(370, 0, 'Escape traffic! Use WASD to move.', {
+            fontSize: 32,
+            backgroundColor: '#000000',
+            fixedWidth: 650,
+        }).setDepth(3);
     }
 
     update() {

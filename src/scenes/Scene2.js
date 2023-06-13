@@ -29,6 +29,12 @@ class Scene2 extends Phaser.Scene {
 
         this.initialTime = 60;
         this.timeLeft = this.add.text(0, 0, 'Timer: ' + this.initialTime, clockConfig).setDepth(3);
+
+        this.add.text(420, 0, 'Drag the crew away from Guido!', {
+            fontSize: 32,
+            backgroundColor: '#000000',
+            fixedWidth: 580,
+        }).setDepth(3);
         
         this.voice1 = this.sound.add('voice1', { mute: false, volume: 0.205, rate: 1});
         this.voice2 = this.sound.add('voice2', { mute: false, volume: 0.205, rate: 1});
@@ -41,9 +47,6 @@ class Scene2 extends Phaser.Scene {
 
         this.farBG = this.add.tileSprite(750, 300, 1500, 600, 'farBG');
         this.closeBG = this.add.tileSprite(750, 300, 1500, 600, 'closeBG');
-
-        this.tutorial_scene2 = this.add.image(300, 300, 'tutorial_scene2');
-        this.tutorial_scene2.depth = 1;
 
         this.chasers = [];
         this.chaserSpawnTimer = 0;

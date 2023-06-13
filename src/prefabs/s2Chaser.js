@@ -107,7 +107,7 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
 
     update() {
         // If chaser is not playing footsteps sound, play it, otherwise do nothing
-        console.log(pause + " " + scene2End);
+        //console.log(pause + " " + scene2End);
         if (!this.playerWalkSFX.isPlaying && !pause && !scene2End) {
             this.playerWalkSFX.play();
         } else if (pause) {

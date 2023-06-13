@@ -47,7 +47,7 @@ class Scene3 extends Phaser.Scene {
         }
 
         this.add.image(500, 480, 'close_bg').setScale(2);
-        this.add.image(400, 400, 'tutorial_scene3');
+        
 
         this.player = new s1Player(this, 200, 200, 'walkingManIdle', 0);
         this.player.anims.create({
@@ -67,6 +67,12 @@ class Scene3 extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.platforms);
 
+        this.add.text(110, 0, 'Drag the crew into positions to start filming!', {
+            fontSize: 32,
+            backgroundColor: '#000000',
+            fixedWidth: 900,
+        }).setDepth(3);
+
         this.spawnActor();
     }
 
@@ -79,6 +85,7 @@ class Scene3 extends Phaser.Scene {
             this.scene.pause().launch('pauseScene');
         }
     }
+    
 
     spawnActor() {
         //spawn actor randomly in scene

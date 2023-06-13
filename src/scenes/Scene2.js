@@ -18,7 +18,7 @@ class Scene2 extends Phaser.Scene {
         this.load.audio('voice5', 'dillonbecker/scene2/voice5.wav');
         this.load.audio('voice6', 'dillonbecker/scene2/voice6.wav');
         this.load.audio('voice7', 'dillonbecker/scene2/voice7.wav');
-        this.load.image("dragaway", "dragaway.png");
+        this.load.image("tutorial_scene2", "tutorial_scene2.png");
     }
 
     create() {
@@ -37,8 +37,8 @@ class Scene2 extends Phaser.Scene {
         this.farBG = this.add.tileSprite(750, 300, 1500, 600, 'farBG');
         this.closeBG = this.add.tileSprite(750, 300, 1500, 600, 'closeBG');
 
-        this.dragaway = this.add.image(300, 300, 'dragaway').setScale(2);
-        this.dragaway.depth = 1;
+        this.tutorial_scene2 = this.add.image(300, 300, 'tutorial_scene2');
+        this.tutorial_scene2.depth = 1;
 
         currScene = 'playScene2';
         keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);

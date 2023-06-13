@@ -10,7 +10,11 @@ class Scene1 extends Phaser.Scene {
         this.load.image('walkingManIdle','walkingManIdle.png');
         this.load.image('ground','ground.png');
         this.load.image('car','car.png');
-        this.load.image('walkright', 'walkright.png');
+        this.load.image('car2','car2.png');
+        this.load.image('tutorial', 'tutorial_scene1.png');
+        this.load.image('close_bg_scene1', 'close_bg_scene1.png');
+        this.load.image('far_bg_scene1', 'far_bg_scene1.png');
+        this.load.image('farthest_bg_scene1', 'farthest_bg_scene1.png');
         this.load.audio('wind', 'kronbits/scene1/Retro Cinematic Wind 02.wav')
     }
 
@@ -33,7 +37,9 @@ class Scene1 extends Phaser.Scene {
 
         this.keys = this.input.keyboard.addKeys("W,A,S,D");
 
-        this.moveright = this.add.image(300, 300, 'walkright').setScale(2);
+        this.add.image(550, 400, 'farthest_bg_scene1');
+        this.add.image(550, 525, 'close_bg_scene1');
+        this.add.image(1500, 320, 'far_bg_scene1').setScale(2);
 
         this.player = new s1Player(this, 200, 200, 'walkingManIdle', 0);
         this.player.anims.create({
@@ -51,14 +57,18 @@ class Scene1 extends Phaser.Scene {
         //collidables, including cars, the ground and eventually other obstacles
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(400, 600, 'ground');
-        this.platforms.create(400, 575, 'car').setScale(2).refreshBody();
+        this.platforms.create(100, 560, 'car');
+        this.platforms.create(375, 560, 'car2');
+        this.platforms.create(650, 560, 'car');
+        this.platforms.create(925, 560, 'car');
+        
 
         this.physics.add.collider(this.player, this.platforms);
     }
 
     update() {
         this.player.update();
-        if (this.player.x > 500) {
+        if (this.player.x > 900) {
             this.scene.start('playScene2');
         }
     }

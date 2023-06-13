@@ -10,7 +10,9 @@ class Scene3 extends Phaser.Scene {
         this.load.image('walkingManIdle','walkingManIdle.png');
         this.load.image('ground','ground.png');
         this.load.image('close_bg','close_bg_scene3.png');
-        this.load.image('draghere', 'draghere.png');
+        this.load.image('tutorial_scene3', 'tutorial_scene3.png');
+        this.load.image('lampSmall', 'lampSmall.png');
+        this.load.image('lampLarge', 'lampLarge.png');
         this.load.audio('chime1', 'kronbits/scene3/Retro Instrument - choir bass - C00.wav');
         this.load.audio('chime2', 'kronbits/scene3/Retro Instrument - choir bass - C02.wav');
         this.load.audio('chime3', 'kronbits/scene3/Retro Instrument - choir bass - C04.wav');
@@ -35,8 +37,16 @@ class Scene3 extends Phaser.Scene {
 
         this.keys = this.input.keyboard.addKeys("W,A,S,D");
 
-        this.add.image(400, 450, 'close_bg').setScale(2);
-        this.add.image(400, 400, 'draghere').setScale(2);
+        for (let i = 0; i < 1050 / 50; i ++) {
+            this.add.image(i * 50, 590, 'lampSmall').setScale(0.5);
+        }
+
+        for (let i = 0; i < 1050 / 190; i ++) {
+            this.add.image((i * 190) + 10, 565, 'lampLarge').setScale(0.5);
+        }
+
+        this.add.image(500, 480, 'close_bg').setScale(2);
+        this.add.image(400, 400, 'tutorial_scene3');
 
         this.player = new s1Player(this, 200, 200, 'walkingManIdle', 0);
         this.player.anims.create({

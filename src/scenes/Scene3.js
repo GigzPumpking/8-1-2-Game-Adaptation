@@ -19,8 +19,9 @@ class Scene3 extends Phaser.Scene {
     }
 
     create() {
-
-        currScene = 'playScene1';
+        currScene = 'playScene3';
+        keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+        
         this.playerWalkSFX = this.sound.add('footsteps', { 
             mute: false,
             volume: 0.205,
@@ -61,6 +62,12 @@ class Scene3 extends Phaser.Scene {
 
     update() {
         this.player.update();
+
+        //When P is pressed, pause the game
+        if (Phaser.Input.Keyboard.JustDown(keyP)) {
+            pause = true;
+            this.scene.pause().launch('pauseScene');
+        }
     }
 
     spawnActor() {

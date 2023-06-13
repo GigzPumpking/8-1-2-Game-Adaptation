@@ -20,7 +20,6 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
             rate: 2.3,
             loop: true 
         });
-        this.playerWalkSFX.play();
 
         this.popUpConfig = {
             fontFamily: 'Courier',
@@ -107,6 +106,14 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
+        // If chaser is not playing footsteps sound, play it, otherwise do nothing
+        console.log(pause + " " + scene2End);
+        if (!this.playerWalkSFX.isPlaying && !pause && !scene2End) {
+            this.playerWalkSFX.play();
+        } else if (pause) {
+            this.playerWalkSFX.stop();
+        }
+
         if (this.y > game.config.height - this.height*3) this.move();
         else this.body.setVelocityX(0);
 

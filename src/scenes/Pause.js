@@ -26,13 +26,15 @@ class Pause extends Phaser.Scene {
     }
 
     update() {
+
         let Restart = new Button(centerX, centerY - 100, 'Restart', this, () => {
             this.scene.resume(currScene).stop();
             var sceneRestart = this.scene.get(currScene);
-
+            pause = false;
             sceneRestart.scene.restart();
         })
         let Resume = new Button(centerX, centerY, 'Resume', this, () => {
+            pause = false;
             this.scene.resume(currScene).stop();
         })
     }

@@ -22,7 +22,12 @@ class Scene2 extends Phaser.Scene {
     }
 
     create() {
-        this.initialTime = 50;
+        scene2End = false;
+
+        currScene = 'playScene2';
+        keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+
+        this.initialTime = 60;
         this.timeLeft = this.add.text(0, 0, 'Timer: ' + this.initialTime, clockConfig).setDepth(3);
         
         this.voice1 = this.sound.add('voice1', { mute: false, volume: 0.205, rate: 1});
@@ -40,8 +45,6 @@ class Scene2 extends Phaser.Scene {
         this.dragaway = this.add.image(300, 300, 'dragaway').setScale(2);
         this.dragaway.depth = 1;
 
-        currScene = 'playScene2';
-        keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         this.chasers = [];
         this.chaserSpawnTimer = 0;
         this.chaserSpawnRate = 500;
@@ -78,6 +81,7 @@ class Scene2 extends Phaser.Scene {
 
         //eventually the player escapes to scene 3!
         this.time.delayedCall((this.initialTime*1000), () => {
+            scene2End = true;
             this.chasers.forEach(chaser => {
                 chaser.playerWalkSFX.stop();
             });
@@ -94,14 +98,17 @@ class Scene2 extends Phaser.Scene {
         this.farBG.tilePositionX += (1.8);
 
         //When P is pressed, pause the game
-        if (Phaser.Input.Keyboard.JustDown(keyP)) this.scene.pause().launch('pauseScene');
-        //Spawn chasers until there are 5
+        if (Phaser.Input.Keyboard.JustDown(keyP)) {
+            pause = true;
+            this.scene.pause().launch('pauseScene');
+        }
 
         //periodically spawn chasers while there are less than 10
         if (this.chasers.length < 10) {
             if (this.chaserSpawnTimer < 0) {
                 this.spawnChaser();
                 this.chaserSpawnTimer = this.chaserSpawnRate;
+                if (this.chaserSpawnRate > 100) this.chaserSpawnRate -= 50;
             }
             else this.chaserSpawnTimer--;
         }
@@ -113,6 +120,11 @@ class Scene2 extends Phaser.Scene {
             // if chaser is touching player, end game
 
             if (chaser.x >= this.player.x - this.player.width*this.player.scale + 30 && chaser.y >= this.player.y - this.player.height*this.player.scale - 20) {
+                scene2End = true;
+                this.chasers.forEach(chaser => {
+                    chaser.playerWalkSFX.stop();
+                });
+
                 this.scene.start('gameOverScene');
             }
 
@@ -127,8 +139,8 @@ class Scene2 extends Phaser.Scene {
     spawnChaser() {
         //spawn a chaser at a random location
         let chaser = new s2Chaser(this, -50, game.config.height + this.groundOffset, 'idle', 0);
-        //set chaser speed to random value between 10 and 50
-        chaser.moveSpeed = Math.floor(Math.random() * 40) + 10;
+        //set chaser speed to random value between 25 and 75
+        chaser.moveSpeed = Math.floor(Math.random() * 50) + 25;
 
         //randomize Chaser scale 
         chaser.scale = Math.random() * 0.5 + 2.7;
@@ -142,14 +154,6 @@ class Scene2 extends Phaser.Scene {
         chaser.anims.frameRate = chaser.moveSpeed/3;
 
         this.chasers.push(chaser);
-
-        /*// Add a collider between each chaser
-
-        this.chasers.forEach(chaser => {
-            for (let i = 0; i < this.chasers.length; i++) {
-                this.physics.add.collider(chaser, this.chasers[i]);
-            }
-        });*/
     }
 
 }

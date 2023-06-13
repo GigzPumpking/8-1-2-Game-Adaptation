@@ -44,6 +44,11 @@ let PlayButton, Ready;
 let fallSpeed = 3;
 
 let keyP;
+let pause = false;
+
+let scene1End = false;
+let scene2End = false;
+let scene3End = false;
 
 let currScene;
 

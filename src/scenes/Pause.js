@@ -31,6 +31,7 @@ class Pause extends Phaser.Scene {
             this.scene.resume(currScene).stop();
             var sceneRestart = this.scene.get(currScene);
             pause = false;
+            if (sceneRestart.silentfilm.isPlaying) sceneRestart.silentfilm.stop();
             sceneRestart.scene.restart();
         })
         let Resume = new Button(centerX, centerY, 'Resume', this, () => {

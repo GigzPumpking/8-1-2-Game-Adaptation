@@ -8,6 +8,8 @@
 //    - voice effects for characters speaking in scenes 2 & 3
 //asset pack https://kronbits.itch.io/freesfx
 //    - sfx for character footsteps in scenes 1, 2 & 3, wind sfx in scene 1, music in scene 2
+//Old Movie Music (Royalty Free) Scene 3
+// https://www.youtube.com/watch?v=pipd0LaC-98&list=PLC8Jzz8Gi1UXgMrcIxyXdXx4BjQ6ji6H6&index=1
 
 //PHASER COMPONENTS USED
 // - Camera (Follows the player across the scene in Scene 1)

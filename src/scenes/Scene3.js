@@ -26,12 +26,23 @@ class Scene3 extends Phaser.Scene {
         this.load.audio('chime4', 'kronbits/scene3/chime4.wav');
         this.load.audio('chime5', 'kronbits/scene3/chime5.wav');
         this.load.audio('chime6', 'kronbits/scene3/chime6.wav');
+        this.load.audio('silentfilm', 'silentfilmmusic.mp3');
         this.load.image('redX', 'redX.png');
         this.load.image('endScreen', 'endScreen.png');
         this.load.image('credits', 'credits.png');
     }
 
     create() {
+        
+        //loop silentfilm music song
+        this.silentfilm = this.sound.add('silentfilm', {
+            mute: false,
+            volume: 0.1,
+            rate: 1,
+            loop: true
+        });
+        this.silentfilm.play();
+
         currScene = 'playScene3';
         keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         
@@ -109,10 +120,12 @@ class Scene3 extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.platforms);
 
-        this.add.text(110, 0, 'Drag the crew into positions to start filming!', {
+        this.add.text(55, 0, 'Drag the crew into positions to start filming!', {
             fontSize: 32,
-            backgroundColor: '#000000',
             fixedWidth: 900,
+            backgroundColor: '#2c2c2c',
+            //center
+            align: 'center',
         }).setDepth(3);
 
         this.actorSpriteIndex = 1;
@@ -192,7 +205,8 @@ class Scene3 extends Phaser.Scene {
                             let Restart = new Button(200, 350, 'Restart', this, () => {
                                 //this.scene.resume(currScene).stop();
                                 //var sceneRestart = this.scene.get(currScene);
-                    
+                                //stop music
+                                this.silentfilm.stop();
                                 this.scene.start('playScene1');
                             })
                         });

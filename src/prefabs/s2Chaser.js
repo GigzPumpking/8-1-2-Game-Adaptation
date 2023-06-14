@@ -11,7 +11,9 @@ class s2Chaser extends Phaser.Physics.Arcade.Sprite {
             .setScale(3)
             .setGravityY(300)
             .setInteractive({ draggable: true })
-            .setCollideWorldBounds(true);
+            .setCollideWorldBounds(true)
+            //slightly adjust tint to differentiate from player
+            .setTint(0xBEBDB8);
 
         this.moveSpeed = 20;
         this.playerWalkSFX = this.scene.sound.add('footsteps', { 

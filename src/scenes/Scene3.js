@@ -39,6 +39,8 @@ class Scene3 extends Phaser.Scene {
             rate: 2.3,
         });
 
+        this.actors = [];
+
         /*this.chime1 = this.sound.add('chime1', { 
             mute: false,
             volume: 1,
@@ -162,6 +164,8 @@ class Scene3 extends Phaser.Scene {
         } else {
             this.actorSpriteIndex++;
         }
+
+        this.actors.push(actor);
     }
 
     snapIfOverlap(toDrag) {
@@ -183,10 +187,11 @@ class Scene3 extends Phaser.Scene {
                 } else {
                     this.chimeIndex++;
                 }
+                toDrag.body.gravity.y = 0;
+                toDrag.body.setVelocityY(0);
+                toDrag.body.immovable = true;
                 toDrag.setPosition(this.zoneCoords[i][0], this.zoneCoords[i][1]);
-                toDrag.body.setAllowGravity(false);
-                toDrag.setImmovable();
-                toDrag.setGravityY(0);
+
                 toDrag.draggable = false;
                 //make sure object stays put
 

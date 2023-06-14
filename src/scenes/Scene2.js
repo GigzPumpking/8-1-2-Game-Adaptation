@@ -52,8 +52,6 @@ class Scene2 extends Phaser.Scene {
         this.chaserSpawnTimer = 0;
         this.chaserSpawnRate = 500;
 
-        //this.add.tileSprite(0, 0, 768, 768, 'background').setOrigin(0, 0);
-
         this.groundOffset = 110;
 
         this.player = new s2Player(this, game.config.width - 50, game.config.height - 50 + this.groundOffset, 'idle', 0).setImmovable(true);

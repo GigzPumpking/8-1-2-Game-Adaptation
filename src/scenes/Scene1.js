@@ -44,7 +44,6 @@ class Scene1 extends Phaser.Scene {
 
         this.keys = this.input.keyboard.addKeys("W,A,S,D");
 
-        //this.farthest = this.add.image(550, 400, 'farthest_bg_scene1');
         this.close = this.add.image(550, 525, 'close_bg_scene1');
         this.far = this.add.image(1500, 320, 'far_bg_scene1').setScale(2);
 

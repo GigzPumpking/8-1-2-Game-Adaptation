@@ -3,10 +3,6 @@ class GameOver extends Phaser.Scene {
         super("gameOverScene");
     }
 
-    preload() {
-
-    }
-
     create() {
         let textConfig = {
             fontFamily: 'Courier',

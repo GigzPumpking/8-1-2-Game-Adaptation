@@ -54,36 +54,6 @@ class Scene3 extends Phaser.Scene {
 
         this.actors = [];
 
-        /*this.chime1 = this.sound.add('chime1', { 
-            mute: false,
-            volume: 1,
-            rate: 1,
-        });
-        this.chime2 = this.sound.add('chime2', { 
-            mute: false,
-            volume: 1,
-            rate: 1,
-        });
-        this.chime3 = this.sound.add('chime3', { 
-            mute: false,
-            volume: 1,
-            rate: 1,
-        });
-        this.chime4 = this.sound.add('chime4', { 
-            mute: false,
-            volume: 1,
-            rate: 1,
-        });
-        this.chime5 = this.sound.add('chime5', { 
-            mute: false,
-            volume: 1,
-            rate: 1,
-        });
-        this.chime6 = this.sound.add('chime6', { 
-            mute: false,
-            volume: 1,
-            rate: 1,
-        });*/
         this.chimeIndex = 1;
 
         this.keys = this.input.keyboard.addKeys("W,A,S,D");
@@ -168,8 +138,6 @@ class Scene3 extends Phaser.Scene {
         //spawn actor randomly in scene
         let actor = new s3Actor(this, Math.floor(Math.random() * 1000), 450, 's3actor_' + this.actorSpriteIndex, 0);
         actor.on('drag', function (pointer, dragX, dragY) {
-            //console.log(dragX);
-            //console.log(dragY);
             actor.setPosition(dragX, dragY);
             this.snapIfOverlap(actor);
         }, this);
@@ -192,19 +160,16 @@ class Scene3 extends Phaser.Scene {
                 console.log(toDrag.y);
                 console.log(this.zoneCoords[i][2] + this.zoneCoords[i][3] + margin);
                 console.log(this.zoneCoords[i][2] - this.zoneCoords[i][3] - margin);
-                //console.log(toDrag.y);
                 console.log("snap!");
                 //within the bounds of snappable zone, should snap
                 this.sound.play('chime' + this.chimeIndex, {loop: false, volume: 0.5});
                 if (this.chimeIndex == 6) {
-                    //this.chimeIndex = 1;
                     if (this.chimeIndex == 6) {
                         this.time.delayedCall((500), () => {
                             this.add.image(500, 275, 'endScreen');
                             this.add.image(200, 200, 'credits');
                             let Restart = new Button(200, 350, 'Restart', this, () => {
-                                //this.scene.resume(currScene).stop();
-                                //var sceneRestart = this.scene.get(currScene);
+  
                                 //stop music
                                 this.silentfilm.stop();
                                 this.scene.start('playScene1');
@@ -231,11 +196,6 @@ class Scene3 extends Phaser.Scene {
                 //remove snap zone from list of snappable zones
                 //remove red X sprite
 
-                /*if (this.chimeIndex == 6) {
-                    this.time.delayedCall((100), () => {
-                        this.add.image(500, 500, 'endScreen');
-                    });
-                }*/
                 //check if game is over
                 return true;
             }

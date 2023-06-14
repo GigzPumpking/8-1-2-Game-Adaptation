@@ -1,3 +1,6 @@
+// Adapted Movie Title: 8 1/2
+// Random Movie Selection: +5 points EC
+
 //ART CREDITS
 //art assets were drawn by Luca Stubbe for this project
 //SFX CREDITS:
@@ -6,7 +9,18 @@
 //asset pack https://kronbits.itch.io/freesfx
 //    - sfx for character footsteps in scenes 1, 2 & 3, wind sfx in scene 1, music in scene 2
 
+//PHASER COMPONENTS USED
+// - Camera (Follows the player across the scene in Scene 1)
+// - Physics (Used for collision detection and gravity for the player and other NPC characters in all three scenes)
+// - Timer (Used to create a timer for the player to complete Scene 2)
+// - Text Objects (Used to display dialogue for the chasing NPCs in Scene 2, along with tutorial text in all three scenes)
+// - TileSprite (Used in Scene 2's parallax moving background)
+// - Tween manager (Used for wind sfx fade in in Scene 1 and chaser dialogue in Scene 2)
+// - Animation (Used to create walking animations in all three scenes)
 
+// Programming Credits:
+// - Luca Stubbe
+// - Hung Nguyen
 
 //game config
 let config = {

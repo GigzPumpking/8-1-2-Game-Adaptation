@@ -122,18 +122,18 @@ class Scene3 extends Phaser.Scene {
         this.redXs = [
             this.add.image(100, 550, 'redX'),
             this.add.image(900, 550, 'redX'),
-            this.add.image(180, 350, 'redX'),
-            this.add.image(820, 350, 'redX'),
-            this.add.image(420, 540, 'redX'),
-            this.add.image(650, 540, 'redX'),
+            this.add.image(180, 340, 'redX'),
+            this.add.image(820, 340, 'redX'),
+            this.add.image(420, 520, 'redX'),
+            this.add.image(650, 520, 'redX'),
         ]
         this.zoneCoords = [
             [100, 550, 20, 20],
             [900, 550, 20, 20],
-            [180, 350, 20, 20],
-            [820, 350, 20, 20],
-            [420, 540, 20, 20],
-            [650, 540, 20, 20],
+            [180, 340, 20, 20],
+            [820, 340, 20, 20],
+            [420, 520, 20, 20],
+            [650, 520, 20, 20],
         ];
     }
 
@@ -190,7 +190,7 @@ class Scene3 extends Phaser.Scene {
                 toDrag.body.gravity.y = 0;
                 toDrag.body.setVelocityY(0);
                 toDrag.body.immovable = true;
-                toDrag.setPosition(this.zoneCoords[i][0], this.zoneCoords[i][1]);
+                toDrag.setPosition(this.zoneCoords[i][0], this.zoneCoords[i][1], 3);
 
                 toDrag.draggable = false;
                 //make sure object stays put
@@ -200,7 +200,10 @@ class Scene3 extends Phaser.Scene {
                 }
 
                 this.zoneCoords.splice(i, 1);
+                this.redXs[i].destroy();
+                this.redXs.splice(i, 1);
                 //remove snap zone from list of snappable zones
+                //remove red X sprite
 
                 /*if (this.chimeIndex == 6) {
                     print("you win!");

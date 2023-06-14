@@ -38,7 +38,7 @@ class Scene1 extends Phaser.Scene {
             rate: 1,
             loop: true 
         });
-        //this.windSFX.play();
+        this.windSFX.play();
 
         this.keys = this.input.keyboard.addKeys("W,A,S,D");
 
@@ -88,6 +88,7 @@ class Scene1 extends Phaser.Scene {
 
         if (this.player.x > 500) {
             scene1End = true;
+            this.windSFX.stop();
             this.scene.start('playScene2');
         }
         

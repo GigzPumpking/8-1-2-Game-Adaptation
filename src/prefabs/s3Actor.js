@@ -13,6 +13,7 @@ class s3Actor extends Phaser.Physics.Arcade.Sprite {
             .setInteractive({ draggable: true })
             .setCollideWorldBounds(true);
 
+        this.draggable = true;
         this.moveSpeed = 20;
         this.playerWalkSFX = scene.sound.add('footsteps', { 
             mute: false,
@@ -22,4 +23,5 @@ class s3Actor extends Phaser.Physics.Arcade.Sprite {
         });
         //this.playerWalkSFX.play();
     }
+
 }

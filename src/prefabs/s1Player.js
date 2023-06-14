@@ -19,13 +19,13 @@ class s1Player extends Phaser.Physics.Arcade.Sprite {
         if (this.scene.keys["A"].isDown) {
             this.setVelocityX(-160);
             this.flipX = true;
-            if (this.anims.isPlaying) {
+            if (!this.anims.isPlaying) {
                 this.anims.play('PlayerWalk');
             }
         } else if (this.scene.keys["D"].isDown) {
             this.setVelocityX(160);
             this.flipX = false;
-            if (this.anims.isPlaying) {
+            if (!this.anims.isPlaying) {
                 this.anims.play('PlayerWalk');
             }
 
@@ -33,6 +33,10 @@ class s1Player extends Phaser.Physics.Arcade.Sprite {
         } else {
             this.setVelocityX(0);
             this.anims.stop();
+        }
+
+        if (this.body.velocity.y != 0) {
+            this.anims.stop()
         }
 
         if (this.scene.keys["W"].isDown && this.body.velocity.y == 0) {

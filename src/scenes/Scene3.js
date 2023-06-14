@@ -120,16 +120,16 @@ class Scene3 extends Phaser.Scene {
         this.redXs = [
             this.add.image(100, 550, 'redX'),
             this.add.image(900, 550, 'redX'),
-            this.add.image(100, 350, 'redX'),
-            this.add.image(900, 350, 'redX'),
+            this.add.image(180, 350, 'redX'),
+            this.add.image(820, 350, 'redX'),
             this.add.image(420, 540, 'redX'),
             this.add.image(650, 540, 'redX'),
         ]
         this.zoneCoords = [
             [100, 550, 20, 20],
             [900, 550, 20, 20],
-            [100, 350, 20, 20],
-            [900, 350, 20, 20],
+            [180, 350, 20, 20],
+            [820, 350, 20, 20],
             [420, 540, 20, 20],
             [650, 540, 20, 20],
         ];
@@ -189,6 +189,10 @@ class Scene3 extends Phaser.Scene {
                 toDrag.setGravityY(0);
                 toDrag.draggable = false;
                 //make sure object stays put
+
+                if (toDrag.x > 500) {
+                    toDrag.flipX = true;
+                }
 
                 this.zoneCoords.splice(i, 1);
                 //remove snap zone from list of snappable zones

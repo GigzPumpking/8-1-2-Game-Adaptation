@@ -14,6 +14,8 @@ class Scene1 extends Phaser.Scene {
         this.load.image('tutorial', 'tutorial_scene1.png');
         this.load.image('close_bg_scene1', 'close_bg_scene1.png');
         this.load.image('far_bg_scene1', 'far_bg_scene1.png');
+        this.load.image('carCollider', 'carCollider.png');
+        this.load.image('carHoodCollider', 'carHoodCollider.png');
         this.load.image('farthest_bg_scene1', 'farthest_bg_scene1.png');
         this.load.audio('wind', 'kronbits/scene1/Retro Cinematic Wind 02.wav')
     }
@@ -65,10 +67,13 @@ class Scene1 extends Phaser.Scene {
         //collidables, including cars, the ground and eventually other obstacles
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(400, 600, 'ground');
-        this.platforms.create(100, 560, 'car');
-        this.platforms.create(375, 560, 'car2');
-        this.platforms.create(650, 560, 'car');
-        this.platforms.create(925, 560, 'car');
+
+        for (let i = 0; i < 4000; i += 425) {
+            this.platforms.create(i, 520, 'carCollider');
+            this.platforms.create(i - 50, 550, 'carHoodCollider');
+            this.platforms.create(i + 50, 550, 'carHoodCollider');
+            this.add.image(i, 560, 'car');
+        }
         
 
         this.physics.add.collider(this.player, this.platforms);

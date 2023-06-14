@@ -35,9 +35,7 @@ class s1Player extends Phaser.Physics.Arcade.Sprite {
             this.anims.stop();
         }
 
-        //jump
-        if (this.scene.keys["W"].isDown && this.body.touching.down)
-        {
+        if (this.scene.keys["W"].isDown && this.body.velocity.y == 0) {
             this.setVelocityY(-330);
             this.anims.stop();
         }

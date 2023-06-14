@@ -39,6 +39,7 @@ class Scene1 extends Phaser.Scene {
             volume: 0.205,
             rate: 1,
             loop: true 
+
         });
         this.windSFX.play();
 
@@ -49,7 +50,7 @@ class Scene1 extends Phaser.Scene {
         this.far = this.add.image(1500, 320, 'far_bg_scene1').setScale(2);
 
         this.cameras.main.setBounds(0, 0, this.far.width * this.far.scale, this.far.height * this.far.scale, true);
-        this.physics.world.setBounds(0, 0, this.far.width * this.far.scale, this.far.height * this.far.scale, true);
+        this.physics.world.setBounds(0, 0, this.far.width * this.far.scale, this.far.height * this.far.scale + 20, true);
 
         this.player = new s1Player(this, 200, 200, 'walkingManIdle', 0);
         this.player.anims.create({
@@ -96,7 +97,7 @@ class Scene1 extends Phaser.Scene {
             this.scene.pause().launch('pauseScene');
         }
 
-        if (this.player.x > 2950) {
+        if (this.player.x > 2920) {
             scene1End = true;
             this.windSFX.stop();
             this.scene.start('playScene2');

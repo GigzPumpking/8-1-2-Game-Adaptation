@@ -27,6 +27,8 @@ class Scene3 extends Phaser.Scene {
         this.load.audio('chime5', 'kronbits/scene3/chime5.wav');
         this.load.audio('chime6', 'kronbits/scene3/chime6.wav');
         this.load.image('redX', 'redX.png');
+        this.load.image('endScreen', 'endScreen.png');
+        this.load.image('credits', 'credits.png');
     }
 
     create() {
@@ -135,6 +137,7 @@ class Scene3 extends Phaser.Scene {
             [420, 520, 20, 20],
             [650, 520, 20, 20],
         ];
+        this.occupied = [false, false, false, false, false, false];
     }
 
     update() {
@@ -152,12 +155,10 @@ class Scene3 extends Phaser.Scene {
         //spawn actor randomly in scene
         let actor = new s3Actor(this, Math.floor(Math.random() * 1000), 450, 's3actor_' + this.actorSpriteIndex, 0);
         actor.on('drag', function (pointer, dragX, dragY) {
-            if (actor.draggable) {
-                //console.log(dragX);
-                //console.log(dragY);
-                actor.setPosition(dragX, dragY);
-                this.snapIfOverlap(actor);
-            }
+            //console.log(dragX);
+            //console.log(dragY);
+            actor.setPosition(dragX, dragY);
+            this.snapIfOverlap(actor);
         }, this);
         if (this.actorSpriteIndex == 6) {
             this.actorSpriteIndex = 1;
@@ -183,17 +184,28 @@ class Scene3 extends Phaser.Scene {
                 //within the bounds of snappable zone, should snap
                 this.sound.play('chime' + this.chimeIndex, {loop: false, volume: 0.5});
                 if (this.chimeIndex == 6) {
-                    this.chimeIndex = 1;
+                    //this.chimeIndex = 1;
+                    if (this.chimeIndex == 6) {
+                        this.time.delayedCall((500), () => {
+                            this.add.image(500, 275, 'endScreen');
+                            this.add.image(200, 200, 'credits');
+                            let Restart = new Button(200, 350, 'Restart', this, () => {
+                                //this.scene.resume(currScene).stop();
+                                //var sceneRestart = this.scene.get(currScene);
+                    
+                                this.scene.start('playScene1');
+                            })
+                        });
+                    }
                 } else {
                     this.chimeIndex++;
                 }
-                toDrag.body.gravity.y = 0;
-                toDrag.body.setVelocityY(0);
-                toDrag.body.immovable = true;
-                toDrag.setPosition(this.zoneCoords[i][0], this.zoneCoords[i][1], 3);
-
-                toDrag.draggable = false;
-                //make sure object stays put
+                let tempDrag = this.add.image(toDrag.x, toDrag.y, toDrag.texture);
+                toDrag.destroy();
+                toDrag = tempDrag;
+                toDrag.setScale(3);
+                toDrag.setPosition(this.zoneCoords[i][0], this.zoneCoords[i][1]);
+                //replace the s3Actor with an image to prevent movement and dragging
 
                 if (toDrag.x > 500) {
                     toDrag.flipX = true;
@@ -206,7 +218,9 @@ class Scene3 extends Phaser.Scene {
                 //remove red X sprite
 
                 /*if (this.chimeIndex == 6) {
-                    print("you win!");
+                    this.time.delayedCall((100), () => {
+                        this.add.image(500, 500, 'endScreen');
+                    });
                 }*/
                 //check if game is over
                 return true;

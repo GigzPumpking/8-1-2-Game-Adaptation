@@ -38,10 +38,9 @@ class Scene1 extends Phaser.Scene {
             mute: false,
             volume: 0.205,
             rate: 1,
-            loop: true 
+            loop: false 
 
         });
-        this.windSFX.play();
 
         this.keys = this.input.keyboard.addKeys("W,A,S,D");
 
@@ -84,6 +83,18 @@ class Scene1 extends Phaser.Scene {
             backgroundColor: '#000000',
             fixedWidth: 650,
         }).setDepth(3);
+
+        this.loopWind();
+    }
+
+    loopWind() {
+        this.windSFX.play();
+        this.tweens.add({
+            targets:  this.windSFX,
+            volume:  { from: 0, to: 0.205 },
+            duration: 300,
+        });
+        this.windSFX.on('complete', () => { this.loopWind() });
     }
 
     update() {
